@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplicationDetailDialogComponent } from '../../../../models/application-detail-dialog/application-detail-dialog.component';
+import { LoanApplication } from '../../models/loan.application.modal';
 
 @Component({
   selector: 'app-application-list-view',
@@ -25,8 +26,8 @@ import { ApplicationDetailDialogComponent } from '../../../../models/application
 })
 export class ApplicationListViewComponent implements OnInit, OnDestroy {
   displayedColumns = ['applicantName', 'loanType', 'amount', 'status', 'date', 'action'];
-  dataSource = new MatTableDataSource<any>([]);
-  originalData: any[] = [];
+  dataSource = new MatTableDataSource<LoanApplication>([]);
+  originalData: LoanApplication[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   apiCall!: Subscription;
   filterSubscription!: Subscription;
@@ -119,8 +120,8 @@ export class ApplicationListViewComponent implements OnInit, OnDestroy {
     if (this.paginator) {
       this.paginator.firstPage();
     }
-    console.log(this.dataSource.data.length);
-    console.log(this.dataSource.paginator);
+    // console.log(this.dataSource.data.length);
+    // console.log(this.dataSource.paginator);
 
 
     this.loanService.filteredApplications.next(this.dataSource.data);
