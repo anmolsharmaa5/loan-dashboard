@@ -42,10 +42,16 @@
             <mat-card class="table-card">
                 <div class="table-header">
                     <h3>Leads ({{ filteredLeads.length }})</h3>
-                    <button mat-stroked-button>
-                        <mat-icon>filter_list</mat-icon>
-                        Apply Filter
-                    </button>
+                    <div class="header-actions">
+                        <button mat-stroked-button>
+                            <mat-icon>filter_list</mat-icon>
+                            Apply Filter
+                        </button>
+                        <button mat-stroked-button (click)="downloadExcel()">
+                            <mat-icon>download</mat-icon>
+                            Download Excel
+                        </button>
+                    </div>
                 </div>
                 <table mat-table [dataSource]="pagedLeads">
                     <ng-container matColumnDef="leadName">

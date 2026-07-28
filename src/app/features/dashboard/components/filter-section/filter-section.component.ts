@@ -29,6 +29,7 @@ import { LoanService } from '../../../../core/services/loan.service';
 })
 export class FilterSectionComponent implements OnInit, OnDestroy {
   filterForm !: FormGroup
+  filteredApplications: any = []
   constructor(private fb: FormBuilder, private loanService: LoanService) {
     this.filterForm = this.fb.group({
       applicantName: [""],
@@ -37,6 +38,10 @@ export class FilterSectionComponent implements OnInit, OnDestroy {
       sortBy: [""],
       sortOrder: ['asc'],
     })
+
+    this.loanService.filteredApplications.subscribe((data: any) => {
+      this.filteredApplications = data
+    });
   }
   ngOnInit(): void {
     this.filterForm.valueChanges.subscribe((res) => {
@@ -45,7 +50,7 @@ export class FilterSectionComponent implements OnInit, OnDestroy {
     )
   }
 
-  toggleSortOrder(){
+  toggleSortOrder() {
     const current = this.filterForm.value.sortOrder;
     this.filterForm.patchValue({ sortOrder: current === 'desc' ? 'asc' : 'desc' });
   }
@@ -58,6 +63,10 @@ export class FilterSectionComponent implements OnInit, OnDestroy {
       sortBy: '',
       sortOrder: ['asc'],
     })
+  }
+
+  downloadExcel() {
+    this.loanService.downloadExcel(this.filteredApplications, 'Loan')
   }
 
   ngOnDestroy(): void {

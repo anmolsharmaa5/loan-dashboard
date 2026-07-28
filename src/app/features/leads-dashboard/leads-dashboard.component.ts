@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+// import * as XLSX from 'xlsx';
+// import { saveAs } from 'file-saver';
+import { LoanService } from '../../core/services/loan.service';
 
 @Component({
   selector: 'app-leads-dashboard',
@@ -74,13 +77,13 @@ export class LeadsDashboardComponent {
     }
   ];
 
-  constructor(private leadService: LeadService) { }
+  constructor(private leadService: LeadService, private loanService : LoanService) { }
 
   ngOnInit(): void {
     this.fetchLeads();
   }
 
-  fetchLeads(){
+  fetchLeads() {
     this.isLoading = true;
     this.hasError = false;
     this.leadService.getLeads().subscribe({
@@ -108,25 +111,28 @@ export class LeadsDashboardComponent {
     this.pageIndex = 0;
   }
 
-  get pagedLeads(){
+  get pagedLeads() {
     const start = this.pageIndex * this.pageSize;
     return this.filteredLeads.slice(start, start + this.pageSize);
   }
 
-  get totalPages(){
+  get totalPages() {
     return Math.max(1, Math.ceil(this.filteredLeads.length / this.pageSize));
   }
 
-  nextPage(){
+  nextPage() {
     if (this.pageIndex < this.totalPages - 1) this.pageIndex++;
   }
 
-  prevPage(){
+  prevPage() {
     if (this.pageIndex > 0) this.pageIndex--;
   }
 
-  statusClass(status: string){
+  statusClass(status: string) {
     return 'status-' + status.toLowerCase();
   }
 
+  downloadExcel() {
+    this.loanService.downloadExcel(this.filteredLeads, 'Leads')
+  }
 }

@@ -33,10 +33,15 @@
             </mat-select>
         </mat-form-field>
         <button class="sortBtn" mat-stroked-button (click)="toggleSortOrder()" [disabled]="!filterForm.value.sortBy">
-            <mat-icon style="margin: 0;">{{ filterForm.value.sortOrder === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+            <mat-icon style="margin: 0;">{{ filterForm.value.sortOrder === 'desc' ? 'arrow_downward' : 'arrow_upward'
+                }}</mat-icon>
         </button>
         <button mat-stroked-button color="muted" (click)="reset()">
             Reset
+        </button>
+        <button mat-stroked-button (click)="downloadExcel()">
+            <mat-icon>download</mat-icon>
+            Download Excel
         </button>
     </div>
 </form>
