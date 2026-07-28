@@ -5,7 +5,7 @@ import { GlobalApiValue } from '../../../common/globalApi';
 import { BehaviorSubject } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { LoanApplication } from '../../features/dashboard/models/loan.application.modal';
+import { LoanApplication } from '../modals/loan.application.modal';
 
 @Injectable({
   providedIn: 'root'

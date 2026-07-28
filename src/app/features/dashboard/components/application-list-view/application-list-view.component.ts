@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplicationDetailDialogComponent } from '../../../../models/application-detail-dialog/application-detail-dialog.component';
-import { LoanApplication } from '../../models/loan.application.modal';
+import { LoanApplication } from '../../../../core/modals/loan.application.modal';
 
 @Component({
   selector: 'app-application-list-view',
