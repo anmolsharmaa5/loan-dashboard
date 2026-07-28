@@ -1,0 +1,22 @@
+{
+  "leads": [
+    { "id": "DMI1938WK2", "leadName": "Finverge Labs", "creationDate": "2026-07-06", "status": "Pending" },
+    { "id": "DMI9283KWJ", "leadName": "Zentora Tech", "creationDate": "2026-07-05", "status": "Active" },
+    { "id": "DMI1922JK70", "leadName": "CredoraX Solutions", "creationDate": "2026-07-05", "status": "Rejected" },
+    { "id": "DMI1922JK71", "leadName": "BharatNest Ventures", "creationDate": "2026-07-05", "status": "Disbursed" },
+    { "id": "DMI1922JK72", "leadName": "NirogGenix Health", "creationDate": "2026-07-05", "status": "Active" },
+    { "id": "DMI1922JK73", "leadName": "YantraGrid Systems", "creationDate": "2026-07-05", "status": "Pending" },
+    { "id": "DMI1922JK74", "leadName": "Aayati Digital", "creationDate": "2026-07-04", "status": "Active" },
+    { "id": "DMI1922JK75", "leadName": "Vridhi AI Pvt Ltd", "creationDate": "2026-07-04", "status": "Pending" },
+    { "id": "DMI1922JK76", "leadName": "Tatsam Mobility", "creationDate": "2026-07-04", "status": "Disbursed" },
+    { "id": "DMI1922JK77", "leadName": "Kavya Textiles", "creationDate": "2026-07-03", "status": "Active" },
+    { "id": "DMI1922JK78", "leadName": "Prakash Auto Parts", "creationDate": "2026-07-03", "status": "Rejected" },
+    { "id": "DMI1922JK79", "leadName": "Meridian Foods", "creationDate": "2026-07-03", "status": "Pending" },
+    { "id": "DMI1922JK80", "leadName": "Sundara Handicrafts", "creationDate": "2026-07-02", "status": "Active" },
+    { "id": "DMI1922JK81", "leadName": "Bhoomi Agro Traders", "creationDate": "2026-07-02", "status": "Disbursed" },
+    { "id": "DMI1922JK82", "leadName": "Nexora Electronics", "creationDate": "2026-07-01", "status": "Pending" },
+    { "id": "DMI1922JK83", "leadName": "Shreeji Logistics", "creationDate": "2026-07-01", "status": "Active" },
+    { "id": "DMI1922JK84", "leadName": "Vayu Wind Energy", "creationDate": "2026-06-30", "status": "Rejected" },
+    { "id": "DMI1922JK85", "leadName": "Ankura Pharma", "creationDate": "2026-06-30", "status": "Disbursed" }
+  ]
+}

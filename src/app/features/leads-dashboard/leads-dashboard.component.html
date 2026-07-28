@@ -1,0 +1,94 @@
+<div class="top-bar">
+    <div class="brand">
+        <mat-icon>account_balance</mat-icon>
+        <span>DMI Finance</span>
+    </div>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search-field">
+        <input matInput placeholder="Search here" [(ngModel)]="searchTerm" (ngModelChange)="applySearch()">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <div class="user-info">
+        <span>Welcome, Samantha</span>
+        <mat-icon>account_circle</mat-icon>
+    </div>
+</div>
+<div class="leads-container">
+    <div class="dasboard">
+        <h1 class="page-title">Dashboard</h1>
+        <div *ngIf="isLoading" class="state-container">
+            <mat-spinner diameter="40"></mat-spinner>
+            <p>Loading leads...</p>
+        </div>
+
+        <div *ngIf="hasError && !isLoading" class="state-container">
+            <mat-icon color="warn">error_outline</mat-icon>
+            <p>Unable to load leads right now.</p>
+            <button mat-stroked-button color="primary" (click)="fetchLeads()">Retry</button>
+        </div>
+
+        <ng-container *ngIf="!isLoading && !hasError">
+            <div class="funnel-strip">
+                <mat-card class="funnel-card" *ngFor="let card of funnelCards" [ngClass]="card.colorClass">
+                    <mat-card-content>
+                        <div class="stage-row" *ngFor="let stage of card.stages">
+                            <mat-icon class="bullet">{{ stage.active ? 'radio_button_checked' :
+                                'radio_button_unchecked'}}</mat-icon>
+                            <span class="stage-label">{{ stage.label }}</span>
+                            <span class="stage-count">{{ stage.count }}</span>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <mat-card class="table-card">
+                <div class="table-header">
+                    <h3>Leads ({{ filteredLeads.length }})</h3>
+                    <button mat-stroked-button>
+                        <mat-icon>filter_list</mat-icon>
+                        Apply Filter
+                    </button>
+                </div>
+                <table mat-table [dataSource]="pagedLeads">
+                    <ng-container matColumnDef="leadName">
+                        <th mat-header-cell *matHeaderCellDef>Lead Name</th>
+                        <td mat-cell *matCellDef="let lead">{{ lead.leadName }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef>Lead ID</th>
+                        <td mat-cell *matCellDef="let lead">{{ lead.id }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="creationDate">
+                        <th mat-header-cell *matHeaderCellDef>Lead Creation Date</th>
+                        <td mat-cell *matCellDef="let lead">{{ lead.creationDate | date:'MMM dd, yyyy' }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Status</th>
+                        <td mat-cell *matCellDef="let lead">
+                            <span class="status-chip" [ngClass]="statusClass(lead.status)">{{ lead.status }}</span>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+
+                <div class="empty-state" *ngIf="filteredLeads.length === 0">
+                    <mat-icon>search_off</mat-icon>
+                    <p>No leads match your search.</p>
+                </div>
+
+                <div class="table-footer" *ngIf="filteredLeads.length > 0">
+                    <span>Showing {{ pageIndex * pageSize + 1 }} to
+                        {{ (pageIndex * pageSize) + pagedLeads.length }} of {{ filteredLeads.length }} entries</span>
+                    <div class="pager">
+                        <button mat-icon-button (click)="prevPage()" [disabled]="pageIndex === 0">
+                            <mat-icon>chevron_left</mat-icon>
+                        </button>
+                        <span>{{ pageIndex + 1 }} / {{ totalPages }}</span>
+                        <button mat-icon-button (click)="nextPage()" [disabled]="pageIndex >= totalPages - 1">
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card>
+        </ng-container>
+    </div>
+</div>
