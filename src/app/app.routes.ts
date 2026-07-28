@@ -20,4 +20,9 @@ export const routes: Routes = [
         path: 'kyc',
         loadComponent: () => import('./features/kyc/kyc.component').then(m => m.KycComponent),
     },
+    // Wildcard route - redirect unknown URLs to dashboard
+    {
+        path: '**',
+        redirectTo: 'dashboard',
+    },
 ];

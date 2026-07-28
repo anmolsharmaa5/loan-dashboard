@@ -1,6 +1,6 @@
-# Loan Application Dashboard
+# Angular Dashboard Assignment
 
-A frontend assignment — building out a loan dashboard in Angular 17 + Angular Material to show off the usual dashboard stuff: filtering, sorting, summary cards, dialogs, and handling the not-so-fun states (loading, empty, API down).
+Frontend assignment built with Angular 17, Angular Material, and JSON Server. It's actually three separate modules living in one app: a loan application dashboard, a leads dashboard, and a mobile KYC flow. Used it as a chance to cover a decent spread of stuff — standalone components, reactive forms, dialogs, filtering/sorting, and the loading/empty/error states that usually get skipped in demos.
 
 ## Stack
 
@@ -18,15 +18,35 @@ npm run dev      # starts json-server on http://localhost:3000
 ng serve          # http://localhost:4200
 ```
 
-Run `npm run dev` first — the app expects the mock API to be up. If it's not reachable, there's a fallback to local demo data so you're not stuck staring at an error screen.
+Start `npm run dev` before `ng serve` — the app expects the mock API to be up. If it's not reachable, the Loan Dashboard falls back to local demo data so it's still usable.
 
-## What's in here
+## Routes
 
-- Dashboard with summary cards — total applications, total loan amount, approval rate, average credit score
-- Applications table with filtering (status, loan type) and sorting (amount, applied date)
-- Click a row to open a dialog with full application details + credit score viz
-- Status update from the dialog with a confirmation step (UI only, doesn't persist beyond the mock API)
-- Loading / empty / error states handled properly instead of just happy-path
+| Route | Module |
+|---|---|
+| `/dashboard` | Loan Application Dashboard |
+| `/leads` | Leads Dashboard |
+| `/kyc` | KYC Mobile View |
+
+Anything unmatched redirects to `/dashboard`.
+
+## Loan Application Dashboard
+
+Summary cards at the top (total applications, total loan amount, approval rate, average credit score), then a table of applications below.
+
+Table supports search, filtering by status and loan type, sorting by amount and applied date, and pagination.
+
+Clicking a row opens a dialog with the full application — details, credit score gauge, and a status dropdown with a confirmation step before it "updates" (UI only, doesn't persist past the mock API).
+
+Handles loading, empty results, and the API being down — in which case there's a button to load local demo data instead.
+
+## Leads Dashboard
+
+CRM-style view for managing leads. Same general shape as the loan dashboard: summary cards (total, new, qualified, converted), a searchable/filterable/sortable table, status chips, and a download menu for exporting to Excel or PDF. Responsive layout.
+
+## KYC Mobile View
+
+Built mobile-first since KYC forms are usually filled out on a phone. Personal info form with reactive forms + dynamic validation, document upload, and a dialog for picking a secondary ID document when needed.
 
 ## Project structure
 
@@ -34,24 +54,30 @@ Run `npm run dev` first — the app expects the mock API to be up. If it's not r
 src/
 ├── app/
 │   ├── core/
-│   │   └── services/
+│   │   ├── services/
+│   │   └── models/
 │   ├── features/
-│   ├── models/
+│   │   ├── dashboard/
+│   │   ├── leads-dashboard/
+│   │   └── kyc/
+│   ├── shared/
+│   └── app.routes.ts
 ├── assets/
-└── db.json
+│   └── db.json
+└── styles.scss
 ```
 
 ## A few decisions worth explaining
 
-**Dialog over side panel for details** — the detail view is really just "look at this application, maybe update its status." A dialog keeps it fast and doesn't require building out routing/panel state for what's essentially a quick lookup.
+**Dialog over side panel for details** — viewing/updating an application is a quick, focused interaction, doesn't need its own route or panel state to manage.
 
-**Table over cards for the list** — with loan amount, status, and applied date all needing to be scanned and compared across rows, a table just works better than cards here. Sortable columns stay aligned, easier to eyeball.
+**Tables over cards** — loan applications and leads both have several fields worth comparing side by side (amount, status, dates), and tables handle that plus sorting/pagination a lot more naturally than a card grid would.
 
-**Local data fallback** — didn't want the whole demo to hinge on json-server staying up. If the API call fails, there's a button to load local demo data instead so the app's still usable/reviewable.
+**Local data fallback** — didn't want the whole thing to hinge on json-server staying up, so if the mock API call fails there's a manual option to load local demo data instead.
 
-## Notes
+## What's not here yet
 
-Status updates are UI-only for now — no persistence layer beyond what json-server gives you for free, so a refresh will reset things. Wasn't in scope for this assignment but would be the obvious next step alongside real auth and pagination on the applications list.
+No backend persistence, auth, or server-side pagination — this was scoped as a frontend assignment so those were left out on purpose. Other things I'd add given more time: CSV/better Excel export, dark mode, unit + e2e tests, and some actual charts on the analytics side instead of just numbers in cards.
 
 ---
 Anmol Sharma
