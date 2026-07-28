@@ -42,7 +42,7 @@ Handles loading, empty results, and the API being down — in which case there's
 
 ## Leads Dashboard
 
-CRM-style view for managing leads. Same general shape as the loan dashboard: summary cards (total, new, qualified, converted), a searchable/filterable/sortable table, status chips, and a download menu for exporting to Excel or PDF. Responsive layout.
+CRM-style view for managing leads. Same general shape as the loan dashboard: summary cards (total, new, qualified, converted), a searchable/filterable/sortable table, status chips, and a download menu for exporting to Excel. Responsive layout.
 
 ## KYC Mobile View
 
