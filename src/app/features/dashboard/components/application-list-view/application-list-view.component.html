@@ -81,19 +81,17 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-cell"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
+            <!-- Empty State -->
+            <div class="state-container" *ngIf="!isLoading && dataSource.data.length === 0">
+                <mat-icon>search_off</mat-icon>
+                <h3>No applications found</h3>
+                <p>
+                    No loan applications match your current filters.
+                    Try changing or clearing the filters.
+                </p>
+            </div>
         </ng-container>
     </ng-container>
-
-    <!-- Empty State -->
-    <div class="state-container" *ngIf="dataSource.data.length === 0">
-        <mat-icon>search_off</mat-icon>
-        <h3>No applications found</h3>
-        <p>
-            No loan applications match your current filters.
-            Try changing or clearing the filters.
-        </p>
-    </div>
-
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
     </mat-paginator>
 </div>

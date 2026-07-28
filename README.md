@@ -1,27 +1,116 @@
-# LoanDashboard
+# Loan Application Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+This project is a Loan Application Dashboard built using Angular 17 and Angular Material.
 
-## Development server
+It was developed as part of a frontend assignment to demonstrate common dashboard functionality such as filtering, sorting, summary cards, dialogs, and handling different application states like loading, empty results, and API failures.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Dashboard with summary cards
+  - Total Applications
+  - Total Loan Amount
+  - Approval Rate
+  - Average Credit Score
+- View loan applications in a Material table
+- Filter applications by Loan Status and Loan Type
+- Sort applications by Loan Amount and Applied Date
+- View complete application details in a dialog
+- Credit score visualization
+- Update application status with a confirmation dialog (UI only)
+- Loading, empty, and error state handling
+- Local demo data fallback when the mock API is unavailable
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tech Stack
 
-## Running unit tests
+- Angular 17
+- TypeScript
+- Angular Material
+- RxJS
+- Reactive Forms
+- JSON Server
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Getting Started
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 1. Install dependencies
 
-## Further help
+```bash
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 2. Start the mock API
+
+```bash
+npm run dev
+```
+
+The JSON Server will start on:
+
+```
+http://localhost:3000
+```
+
+### 3. Run the Angular application
+
+```bash
+ng serve
+```
+
+Open your browser and navigate to:
+
+```
+http://localhost:4200
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── core/
+│   │   └── services/
+│   ├── features/
+│   ├── models/
+├── assets/
+└── db.json
+```
+
+---
+
+## Design Notes
+
+### Application Details
+
+I used a modal dialog for the application details instead of a side panel. The detail view is intended for quick inspection and a simple status update, so a dialog keeps users on the dashboard without interrupting their workflow.
+
+### Mock API Fallback
+
+If the JSON Server is unavailable, the application displays an option to load local demo data. This allows the dashboard to remain functional and makes it easier to evaluate the application without requiring the backend to be running.
+
+---
+
+## Implemented Functionality
+
+- Loan application list
+- Dashboard summary cards
+- Client-side filtering
+- Client-side sorting
+- Loan detail dialog
+- Credit score visualization
+- Status update with confirmation
+- Loading state
+- Empty state
+- Error handling
+- Mock API integration with local data fallback
+
+
+## Author
+
+**Anmol Sharma**
