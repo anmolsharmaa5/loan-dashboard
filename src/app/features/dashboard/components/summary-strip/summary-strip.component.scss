@@ -1,0 +1,27 @@
+.summary-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+  color : #ffffff;
+}
+
+.summary-strip > *:nth-child(1) {
+  background-color: #509c7c;
+}
+
+.summary-strip > *:nth-child(2) {
+  background-color: #5a5ac9;
+}
+
+.summary-strip > *:nth-child(3) {
+  background-color: #3a4555;
+}
+
+.summary-strip > *:nth-child(4) {
+  background-color: #d46584;
+}
+
+// .summary-card{
+//     height: 100px;
+// }

@@ -1,0 +1,34 @@
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  padding: 10px;
+}
+
+.details strong {
+  display: block;
+  color: #a6a6a6;
+}
+
+.details p {
+  font-weight: 500;
+}
+
+.credit-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  position: relative;
+}
+
+.score {
+  position: absolute;
+  top: 40px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.full-width {
+  width: 100%;
+}

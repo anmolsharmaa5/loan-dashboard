@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Loan Application Details</h2>
+<mat-dialog-content>
+  <mat-card>
+    <div class="details">
+      <div>
+        <strong>Application ID</strong>
+        <p>{{application.id}}</p>
+      </div>
+      <div>
+        <strong>Applicant</strong>
+        <p>{{application.applicantName}}</p>
+      </div>
+      <div>
+        <strong>Loan Type</strong>
+        <p>{{application.loanType}}</p>
+      </div>
+      <div>
+        <strong>Amount</strong>
+        <p>{{application.amount | currency:'INR'}}</p>
+      </div>
+      <div>
+        <strong>Status</strong>
+        <p>{{application.status}}</p>
+      </div>
+      <div>
+        <strong>Applied Date</strong>
+        <p>{{application.appliedDate | date}}</p>
+      </div>
+      <div>
+        <strong>Assigned To</strong>
+        <p>{{application.assignedTo}}</p>
+      </div>
+      <div>
+        <strong>Remarks</strong>
+        <p>{{application.remarks}}</p>
+      </div>
+    </div>
+  </mat-card>
+  <div class="credit-section">
+    <mat-progress-spinner
+      mode="determinate"
+      [value]="progress"
+      diameter="100">
+    </mat-progress-spinner>
+    <div class="score">
+      {{application.creditScore}}
+    </div>
+    <p>Credit Score</p>
+  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="selectedStatus">
+      <mat-option
+        *ngFor="let status of statuses"
+        [value]="status">
+        {{status}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="updateStatus()">Update Status</button>
+</mat-dialog-actions>

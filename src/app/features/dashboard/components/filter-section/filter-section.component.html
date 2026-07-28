@@ -1,0 +1,40 @@
+<form [formGroup]="filterForm">
+    <div class="filters">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="compact-field">
+            <mat-label>Search</mat-label>
+            <input matInput formControlName="applicantName" placeholder="Applicant Name">
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="compact-field">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option value="">All</mat-option>
+                <mat-option value="Pending">Pending</mat-option>
+                <mat-option value="Under Review">Under Review</mat-option>
+                <mat-option value="Approved">Approved</mat-option>
+                <mat-option value="Rejected">Rejected</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="compact-field">
+            <mat-label>Loan Type</mat-label>
+            <mat-select formControlName="loanType">
+                <mat-option value="">All</mat-option>
+                <mat-option value="Personal">Personal</mat-option>
+                <mat-option value="Business">Business</mat-option>
+                <mat-option value="Home">Home</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="compact-field">
+            <mat-label>Sort By</mat-label>
+            <mat-select formControlName="sortBy">
+                <mat-option value="appliedDate">Applied Date</mat-option>
+                <mat-option value="amount">Loan Amount</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="sortBtn" mat-stroked-button (click)="toggleSortOrder()" [disabled]="!filterForm.value.sortBy">
+            <mat-icon style="margin: 0;">{{ filterForm.value.sortOrder === 'desc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+        </button>
+        <button mat-stroked-button color="muted" (click)="reset()">
+            Reset
+        </button>
+    </div>
+</form>

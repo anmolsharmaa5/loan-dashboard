@@ -1,0 +1,29 @@
+<div class="summary-strip">
+  <mat-card class="summary-card">
+    <mat-card-content>
+      <span>Total Applications</span>
+      <h2>{{ summary.totalApplications }}</h2>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="summary-card">
+    <mat-card-content>
+      <span>Total Amount</span>
+      <h2>{{ summary.totalAmount | currency:'INR' }}</h2>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="summary-card">
+    <mat-card-content>
+      <span>Approval Rate</span>
+      <h2>{{ summary.approvalRate }}%</h2>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="summary-card">
+    <mat-card-content>
+      <span>Average Credit Score</span>
+      <h2>{{ summary.averageCreditScore }}</h2>
+    </mat-card-content>
+  </mat-card>
+</div>

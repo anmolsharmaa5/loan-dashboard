@@ -1,0 +1,99 @@
+<div class="table-container">
+    <!-- Loading -->
+    <div *ngIf="isLoading" class="state-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading loan applications...</p>
+    </div>
+    <ng-container *ngIf="!isLoading">
+
+        <!-- In Case of Network/Server Error State -->
+        <mat-card class="warning-banner" *ngIf="showLocalButton">
+            <div class="warning-content">
+                <div class="warning-info">
+                    <mat-icon color="warn">warning</mat-icon>
+                    <div>
+                        <h3>Mock server unavailable</h3>
+                        <p>
+                            Unable to connect to <strong>localhost:3000</strong>.
+                            Start the mock server by running
+                            <code>npm run dev</code>, then click <strong>Retry</strong>.
+                            Alternatively, you can continue using local demo data.
+                        </p>
+                    </div>
+                </div>
+                <div class="warning-actions">
+                    <button mat-stroked-button color="primary" (click)="getLoanApplication()">
+                        Retry
+                    </button>
+                    <button mat-raised-button color="primary" (click)="loadLocalData()">
+                        Load Local Data
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+
+        <app-filter-section *ngIf="!hasError"></app-filter-section>
+
+        <ng-container *ngIf="!hasError">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="applicantName">
+                    <th mat-header-cell *matHeaderCellDef> Applicant Name </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.applicantName }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="loanType">
+                    <th mat-header-cell *matHeaderCellDef> Loan Type </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.loanType }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef> Amount </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.amount | currency:'INR' }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-chip class="chip"
+                            [ngClass]="{'approved': element.status === 'Approved','pending': element.status === 'Pending','rejected': element.status === 'Rejected','review': element.status === 'Under Review'}">
+                            {{ element.status }}
+                        </mat-chip>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Applied On </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.appliedDate"> {{element.appliedDate | date:'MMM dd, yyyy' }}</span>
+                        <span *ngIf="!element.appliedDate"> N/A</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-flat-button color="primary" (click)="openDetails(element)">
+                            View Details
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-cell"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </ng-container>
+    </ng-container>
+
+    <!-- Empty State -->
+    <div class="state-container" *ngIf="dataSource.data.length === 0">
+        <mat-icon>search_off</mat-icon>
+        <h3>No applications found</h3>
+        <p>
+            No loan applications match your current filters.
+            Try changing or clearing the filters.
+        </p>
+    </div>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+</div>
