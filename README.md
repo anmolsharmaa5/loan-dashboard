@@ -1,75 +1,34 @@
 # Loan Application Dashboard
 
-This project is a Loan Application Dashboard built using Angular 17 and Angular Material.
+A frontend assignment — building out a loan dashboard in Angular 17 + Angular Material to show off the usual dashboard stuff: filtering, sorting, summary cards, dialogs, and handling the not-so-fun states (loading, empty, API down).
 
-It was developed as part of a frontend assignment to demonstrate common dashboard functionality such as filtering, sorting, summary cards, dialogs, and handling different application states like loading, empty results, and API failures.
+## Stack
 
----
-
-## Features
-
-- Dashboard with summary cards
-  - Total Applications
-  - Total Loan Amount
-  - Approval Rate
-  - Average Credit Score
-- View loan applications in a Material table
-- Filter applications by Loan Status and Loan Type
-- Sort applications by Loan Amount and Applied Date
-- View complete application details in a dialog
-- Credit score visualization
-- Update application status with a confirmation dialog (UI only)
-- Loading, empty, and error state handling
-- Local demo data fallback when the mock API is unavailable
-
----
-
-## Tech Stack
-
-- Angular 17
-- TypeScript
+- Angular 17 / TypeScript
 - Angular Material
 - RxJS
 - Reactive Forms
-- JSON Server
+- JSON Server (mock API)
 
----
-
-## Getting Started
-
-### 1. Install dependencies
+## Running it
 
 ```bash
 npm install
+npm run dev      # starts json-server on http://localhost:3000
+ng serve          # http://localhost:4200
 ```
 
-### 2. Start the mock API
+Run `npm run dev` first — the app expects the mock API to be up. If it's not reachable, there's a fallback to local demo data so you're not stuck staring at an error screen.
 
-```bash
-npm run dev
-```
+## What's in here
 
-The JSON Server will start on:
+- Dashboard with summary cards — total applications, total loan amount, approval rate, average credit score
+- Applications table with filtering (status, loan type) and sorting (amount, applied date)
+- Click a row to open a dialog with full application details + credit score viz
+- Status update from the dialog with a confirmation step (UI only, doesn't persist beyond the mock API)
+- Loading / empty / error states handled properly instead of just happy-path
 
-```
-http://localhost:3000
-```
-
-### 3. Run the Angular application
-
-```bash
-ng serve
-```
-
-Open your browser and navigate to:
-
-```
-http://localhost:4200
-```
-
----
-
-## Project Structure
+## Project structure
 
 ```
 src/
@@ -82,40 +41,17 @@ src/
 └── db.json
 ```
 
----
+## A few decisions worth explaining
 
-## Design Notes
+**Dialog over side panel for details** — the detail view is really just "look at this application, maybe update its status." A dialog keeps it fast and doesn't require building out routing/panel state for what's essentially a quick lookup.
 
-### Application Details
+**Table over cards for the list** — with loan amount, status, and applied date all needing to be scanned and compared across rows, a table just works better than cards here. Sortable columns stay aligned, easier to eyeball.
 
-I used a modal dialog for the application details instead of a side panel. The detail view is intended for quick inspection and a simple status update, so a dialog keeps users on the dashboard without interrupting their workflow.
+**Local data fallback** — didn't want the whole demo to hinge on json-server staying up. If the API call fails, there's a button to load local demo data instead so the app's still usable/reviewable.
 
-### Application List View
+## Notes
 
-I used a Material table instead of cards for the list view, since a table makes it easier to compare loan amount, status, and applied date at a glance and keeps the sortable columns visually aligned across all rows.
-
-
-### Mock API Fallback
-
-If the JSON Server is unavailable, the application displays an option to load local demo data. This allows the dashboard to remain functional and makes it easier to evaluate the application without requiring the backend to be running.
+Status updates are UI-only for now — no persistence layer beyond what json-server gives you for free, so a refresh will reset things. Wasn't in scope for this assignment but would be the obvious next step alongside real auth and pagination on the applications list.
 
 ---
-
-## Implemented Functionality
-
-- Loan application list
-- Dashboard summary cards
-- Client-side filtering
-- Client-side sorting
-- Loan detail dialog
-- Credit score visualization
-- Status update with confirmation
-- Loading state
-- Empty state
-- Error handling
-- Mock API integration with local data fallback
-
-
-## Author
-
-**Anmol Sharma**
+Anmol Sharma
