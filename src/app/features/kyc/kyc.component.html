@@ -1,1 +1,72 @@
-<p>kyc works!</p>
+<div class="kyc-page">
+  <div class="phone-frame">
+    <h2 class="screen-title">Verify Your KYC</h2>
+    <div class="stepper">
+      <ng-container *ngFor="let step of steps; let i = index">
+        <div class="step" [ngClass]="{'done': i < activeStepIndex, 'active': i === activeStepIndex}">
+          <div class="dot">
+            <mat-icon *ngIf="i < activeStepIndex">check</mat-icon>
+            <span *ngIf="i >= activeStepIndex">{{ i + 1 }}</span>
+          </div>
+          <span class="step-label">{{ step.label }}</span>
+        </div>
+        <div class="connector" *ngIf="i < steps.length - 1"></div>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="!flowComplete; else doneBlock">
+      <p class="instruction">Please upload your business registration document</p>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Document Type</mat-label>
+        <mat-select [(ngModel)]="documentType">
+          <mat-option *ngFor="let doc of documentTypes" [value]="doc">{{ doc }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Document number</mat-label>
+        <input matInput [(ngModel)]="documentNumber" placeholder="e.g. UDYAM-YY-02-1234567">
+      </mat-form-field>
+      <div class="upload-box" [class.has-file]="uploadedFile">
+        <input #fileInput type="file" hidden accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event)" />
+        <ng-container *ngIf="!uploadedFile; else filePreview">
+          <mat-icon class="upload-icon">upload_file</mat-icon>
+          <p class="upload-title">Upload Document</p>
+          <p class="upload-hint">
+            PDF, JPG or PNG (Max 2.5 MB)
+          </p>
+          <button mat-stroked-button color="primary" type="button" (click)="fileInput.click()">
+            Select File
+          </button>
+        </ng-container>
+        <ng-template #filePreview>
+          <mat-icon class="upload-icon file-icon">
+            description
+          </mat-icon>
+          <p class="upload-title">
+            {{ uploadedFile.name }}
+          </p>
+          <p class="upload-hint">
+            {{ formatFileSize(uploadedFile.size) }}
+          </p>
+          <button mat-stroked-button type="button" (click)="changeFile(fileInput)">
+            Change File
+          </button>
+        </ng-template>
+      </div>
+      <button mat-raised-button color="primary" class="continue-btn"
+        [disabled]="!documentType ||!documentNumber.trim() ||!uploadedFile" (click)="continue()">
+        Continue
+      </button>
+      <p class="secure-note">
+        <mat-icon inline="true">lock</mat-icon>
+        Your information is secure
+      </p>
+    </ng-container>
+    <ng-template #doneBlock>
+      <div class="complete-block">
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        <h3>KYC verification submitted</h3>
+        <p>We'll notify you once your documents are reviewed.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
