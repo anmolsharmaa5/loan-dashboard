@@ -90,6 +90,11 @@ src/
 
 I used a modal dialog for the application details instead of a side panel. The detail view is intended for quick inspection and a simple status update, so a dialog keeps users on the dashboard without interrupting their workflow.
 
+### Application List View
+
+I used a Material table instead of cards for the list view, since a table makes it easier to compare loan amount, status, and applied date at a glance and keeps the sortable columns visually aligned across all rows.
+
+
 ### Mock API Fallback
 
 If the JSON Server is unavailable, the application displays an option to load local demo data. This allows the dashboard to remain functional and makes it easier to evaluate the application without requiring the backend to be running.
